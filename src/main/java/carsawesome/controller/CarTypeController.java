@@ -2,9 +2,8 @@ package carsawesome.controller;
 
 import carsawesome.model.CarType;
 import carsawesome.service.CarTypeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,13 +15,21 @@ public class CarTypeController {
         this.carTypeService = carTypeService;
     }
 
-    @GetMapping("api/cars/types")
+    @GetMapping("/api/cars/types")
     public List<CarType> getCarTypers(){
         return carTypeService.getCarTypes();
     }
     @PostMapping("/api/cars/type")
     public CarType createCarType(@RequestBody CarType carType){
         return carTypeService.createCarType(carType);
+    }
+    @PutMapping("/api/cars/type/{id}")
+    public CarType updateCarType(@PathVariable long id, @RequestBody CarType carType){
+        return carTypeService.UpdateCarType(id,carType);
+    }
+    @DeleteMapping("api/cars/type/{id}")
+    public ResponseEntity<?> deleteCarType(@PathVariable long id){
+        return carTypeService.deleteCarType(id);
     }
 
 }
