@@ -34,7 +34,7 @@ public class CarRestController {
     public Car createCar(@RequestBody Car car){
         return carService.createCar(car);
     }
-    @DeleteMapping("/api/cars/type/{id}")
+    @DeleteMapping("/api/cars/{id}")
     public ResponseEntity<?> deleteCar(@PathVariable long id){
         return carService.deleteCarById(id);
     }
