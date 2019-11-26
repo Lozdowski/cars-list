@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class CarTypeController {
 
     private CarTypeService carTypeService;
@@ -18,6 +18,10 @@ public class CarTypeController {
     @GetMapping("/api/cars/types")
     public List<CarType> getCarTypers(){
         return carTypeService.getCarTypes();
+    }
+    @GetMapping("/api/cars/type/{id}")
+    public CarType getCarType(@PathVariable long id){
+       return carTypeService.getCarType(id);
     }
     @PostMapping("/api/cars/type")
     public CarType createCarType(@RequestBody CarType carType){

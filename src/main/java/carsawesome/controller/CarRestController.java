@@ -1,11 +1,11 @@
 package carsawesome.controller;
 
 import carsawesome.model.Car;
-import carsawesome.repository.CarsRepository;
 import carsawesome.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -26,10 +26,17 @@ public class CarRestController {
     public Car getCar(@PathVariable long id){
         return carService.getCarById(id);
     }
-    @PostMapping("/api/cars/add")
-    public ResponseEntity<Car> addCar(@RequestBody Car car){
-        Car newCar = carService.ApiAddiCar(car);
-        if(newCar ==null) return new ResponseEntity<>(HttpStatus.CONFLICT);
-        return new ResponseEntity<>(newCar, HttpStatus.OK);
+    @PutMapping("/api/cars/{id}")
+    public Car updateCar(@PathVariable long id, @RequestBody Car car){
+        return carService.updateCar(id,car);
     }
+    @PostMapping("/api/cars/add")
+    public Car createCar(@RequestBody Car car){
+        return carService.createCar(car);
+    }
+    @DeleteMapping("/api/cars/type/{id}")
+    public ResponseEntity<?> deleteCar(@PathVariable long id){
+        return carService.deleteCarById(id);
+    }
+
 }

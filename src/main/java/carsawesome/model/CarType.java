@@ -14,7 +14,10 @@ public class CarType {
     private String type;
 
     public CarType(String type) {
+        this();
         this.type = type;
+    }
+    public CarType(){
     }
 
     public long getId() {

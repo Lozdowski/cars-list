@@ -3,12 +3,12 @@ package carsawesome.service;
 import carsawesome.exception.ResourceNotFoundException;
 import carsawesome.model.CarType;
 import carsawesome.repository.CarTypeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
+
 @Service
 public class CarTypeService {
 
@@ -20,6 +20,9 @@ public class CarTypeService {
 
     public List<CarType> getCarTypes(){
        return carTypeRepository.findAll();
+    }
+    public CarType getCarType(long id){
+        return carTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("car type id: "+id+ " not found!"));
     }
 
     public CarType createCarType(CarType carType){
@@ -34,7 +37,7 @@ public class CarTypeService {
     public ResponseEntity<?> deleteCarType(long id){
         return carTypeRepository.findById(id).map(ct -> {
             carTypeRepository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return new ResponseEntity<>("car type by id "+id+" was deletad", HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("car type id: " + id + " not found!"));
     }
 

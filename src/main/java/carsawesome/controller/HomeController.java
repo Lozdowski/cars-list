@@ -4,7 +4,6 @@ import carsawesome.model.Car;
 import carsawesome.service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -32,18 +31,18 @@ public class HomeController {
         car.setProdYear(inCar.getProdYear());
         car.setBio(inCar.getBio());
         model.addAttribute("car",car);
-        String operationResult = carService.addCar(car);
+        carService.createCar(car);
         return "redirect:/cars";
     }
     @GetMapping("/cars/delete")
     public String deleteCar(@RequestParam long id){
-        carService.deleteCar(id);
+        carService.deleteCarById(id);
         return "redirect:/cars";
 
     }
     @GetMapping("/cars/update")
     public String updateCar(@RequestParam  long id, Model model){
-        Car car = carService.getCarById(id);
+        Car car = carService.getCar(id);
         if(car==null) return "cannot find car to update !";
         model.addAttribute("car",car);
         System.out.println(car);
@@ -51,16 +50,15 @@ public class HomeController {
         //    return carService.updateCar(car);
     }
     @PostMapping("cars/update/confirm")
-    public String updateCarConfrim(@ModelAttribute Car inCar) {
+    public String updateCarConfirm(@ModelAttribute Car inCar) {
         Car car = new Car();
         car.setId(inCar.getId());
         car.setBrand(inCar.getBrand());
         car.setModel(inCar.getModel());
         car.setProdYear(inCar.getProdYear());
         car.setBio(inCar.getBio());
-
-        String operationResult = carService.addCar(car);
-        return "redirect:/cars?message=" + operationResult;
+        carService.createCar(car);
+        return "redirect:/cars?message=" + car;
     }
 
 

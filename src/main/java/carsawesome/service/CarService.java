@@ -1,5 +1,6 @@
 package carsawesome.service;
 
+import carsawesome.exception.ResourceNotFoundException;
 import carsawesome.model.Car;
 import carsawesome.repository.CarsRepository;
 import org.springframework.http.HttpStatus;
@@ -17,42 +18,36 @@ public class CarService {
         this.carsRepository = carsRepository;
     }
 
-    public String addCar(Car car) {
-        Car result = carsRepository.save(car);
-        if (result == null) {
-            return "error while adding new car to list";
-        }
-        return "add " + result.getBrand() + " to collection";
+    public Car createCar(Car car) {
+        return carsRepository.save(car);
     }
 
     public List<Car> getCars() {
         return carsRepository.findAll();
     }
-
-    public void deleteCar(Long id) {
-        carsRepository.deleteById(id);
+    public Car getCarById(long id) {
+        return carsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("car by id: " + id + " not found"));
     }
-
-
-    public String updateCar(Car car) {
-        Car result = carsRepository.save(car);
-        if (result == null) {
-            return "error while adding updating car to list";
-        }
-        return "updated " + result.getBrand() + " in collection";
+    public Car updateCar(long id, Car car) {
+        return carsRepository.findById(id).map(c->{
+            c.setBio(car.getBio());
+            c.setBrand(car.getBrand());
+            c.setProdYear(car.getProdYear());
+            c.setModel(car.getModel());
+            return carsRepository.save(c);
+        }).orElseThrow(()->new ResourceNotFoundException("car with id: "+ id+ " not found"));
     }
-    public Car getCarById(long id){
+    public Car getCar(long id){
         return carsRepository.getCarById(id);
     }
 
-
-
-    // layer of api methods
-    public Car ApiAddiCar(Car car) {
-        return  carsRepository.save(car);
-
+    public ResponseEntity<?> deleteCarById(long id) {
+        return carsRepository.findById(id).map(c->{
+            carsRepository.deleteById(id);
+            return new ResponseEntity<>("car by id "+id+" was deleted",HttpStatus.OK);
+        }).orElseThrow(()-> new ResourceNotFoundException("car by id: "+id+" not found"));
     }
-
 
 
 }
