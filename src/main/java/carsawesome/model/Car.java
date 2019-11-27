@@ -1,36 +1,37 @@
 package carsawesome.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
     private String brand;
+    @NotNull
     private String model;
+    @NotNull
     private String prodYear;
     private String bio;
+    @ManyToOne(fetch= FetchType.LAZY, optional = false)
+    @JoinColumn(name ="car_type_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private CarType carType;
 
-    public Car() {
-    }
 
-    public Car(String brand, String model, String prodYear, String bio) {
-        this();
-        this.brand = brand;
-        this.model = model;
-        this.prodYear = prodYear;
-        this.bio = bio;
-    }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -66,6 +67,14 @@ public class Car {
         this.bio = bio;
     }
 
+    public CarType getCarType() {
+        return carType;
+    }
+
+    public void setCarType(CarType carType) {
+        this.carType = carType;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -74,6 +83,7 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", prodYear='" + prodYear + '\'' +
                 ", bio='" + bio + '\'' +
+                ", carType=" + carType +
                 '}';
     }
 }
