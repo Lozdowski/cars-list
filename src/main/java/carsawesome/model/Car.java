@@ -6,6 +6,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Car {
@@ -23,8 +25,11 @@ public class Car {
     @JoinColumn(name ="car_type_id", nullable = false)
     @OnDelete(action= OnDeleteAction.CASCADE)
     private CarType carType;
-
-
+    @ManyToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "cars_tags",
+            joinColumns = {@JoinColumn(name = "car_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    private Set<Tag> tags = new HashSet<>();
 
     public long getId() {
         return id;
