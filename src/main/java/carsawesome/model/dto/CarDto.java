@@ -16,6 +16,26 @@ public class CarDto {
 
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getProdYear() {
+        return prodYear;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
     public static class Builder{
         private String brand;
         private String model;
