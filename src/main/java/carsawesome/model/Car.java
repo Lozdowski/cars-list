@@ -22,7 +22,6 @@ public class Car {
     @ManyToOne(fetch= FetchType.LAZY, optional = false)
     @JoinColumn(name ="car_type_id", nullable = false)
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JsonIgnore
     private CarType carType;
 
 

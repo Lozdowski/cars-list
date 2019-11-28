@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-public class CarTypeController {
+public class CarTypeRestController {
 
     private CarTypeService carTypeService;
 
-    public CarTypeController(CarTypeService carTypeService) {
+    public CarTypeRestController(CarTypeService carTypeService) {
         this.carTypeService = carTypeService;
     }
 
-    @GetMapping("/api/cars/types")
+    @GetMapping("/api/cars/type")
     public List<CarType> getCarTypers(){
         return carTypeService.getCarTypes();
     }
