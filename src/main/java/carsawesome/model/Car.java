@@ -31,6 +31,18 @@ public class Car {
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private Set<Tag> tags = new HashSet<>();
 
+    public Car(@NotNull String brand, @NotNull String model, @NotNull String prodYear, String bio, CarType carType, Set<Tag> tags) {
+        this.brand = brand;
+        this.model = model;
+        this.prodYear = prodYear;
+        this.bio = bio;
+        this.carType = carType;
+        this.tags = tags;
+    }
+
+    public Car() {
+    }
+
     public long getId() {
         return id;
     }

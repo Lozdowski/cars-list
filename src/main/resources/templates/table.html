@@ -24,14 +24,14 @@
             <td th:text="${car.bio}"></td>
             <td>
                 <form action="/cars/delete" >
-                    <input type="hidden" name="id" th:value="${car.getId()}">
-                    <button class="btn btn-sm btn-danger" type="submit">delete </button>
+                    <input title="hidden" name="id" th:value="${car.getId()}">
+                    <button class="btn btn-sm btn-danger" title="submit">delete </button>
                 </form>
             </td>
             <td>
                 <form action="/cars/update">
-                    <input type="hidden" name="id" th:value="${car.getId()}">
-                    <button class="btn btn-sm btn-primary" type="submit">update </button>
+                    <input title="hidden" name="id" th:value="${car.getId()}">
+                    <button class="btn btn-sm btn-primary" title="submit">update </button>
                 </form>
             </td>
 

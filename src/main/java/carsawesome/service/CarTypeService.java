@@ -30,7 +30,7 @@ public class CarTypeService {
     }
     public CarType UpdateCarType(long id,CarType carType){
        return carTypeRepository.findById(id).map(ct -> {
-            ct.setType(carType.getType());
+            ct.setTitle(carType.getTitle());
             return carTypeRepository.save(ct);
         }).orElseThrow(() -> new ResourceNotFoundException("car type id: " + id + " not found!"));
     }

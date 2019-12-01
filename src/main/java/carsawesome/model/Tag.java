@@ -3,7 +3,7 @@ package carsawesome.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
+@Entity
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,11 +13,11 @@
     <p th:text="${welcome}"> Add new awesome car to collection: </p>
     <p th:text="${resultMessage}"></p>
     <form  th:action="@{/cars/add}" action="/cars/add" method="post">
-        <input type="text"name="brand"placeholder="brand"/>
-        <input type="text"name="model"placeholder="model"/>
-        <input type="text"name="prodYear"placeholder="production Year"/><br>
-        <textarea type="text"name="bio"placeholder="description"></textarea>
-        <button type="submit">ADD</button>
+        <input title="text"name="brand"placeholder="brand"/>
+        <input title="text"name="model"placeholder="model"/>
+        <input title="text"name="prodYear"placeholder="production Year"/><br>
+        <textarea title="text"name="bio"placeholder="description"></textarea>
+        <button title="submit">ADD</button>
 
 
     </form>
@@ -26,12 +26,12 @@
 
 <div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="form-update">
     <form  th:object="${car}" th:action="@{/cars/update/confirm}" action="/cars/update/confirm" method="post">
-        <input type="hidden" name="id" id="id" th:value="${car.getId()}">
-        <input type="text"name="brand" id="brand" th:value="${car.brand}" />
-        <input type="text"name="model" id="model" th:value="${car.model}"/>
-        <input type="text" name="prodYear" id="prodYear" th:value="${car.prodYear}"/>
-        <input type="text" name="bio" id="bio" th:value="${car.bio}"/>
-        <textarea type="text" name =></textarea>
-        <button type="submit">update this car</button>
+        <input title="hidden" name="id" id="id" th:value="${car.getId()}">
+        <input title="text"name="brand" id="brand" th:value="${car.brand}" />
+        <input title="text"name="model" id="model" th:value="${car.model}"/>
+        <input title="text" name="prodYear" id="prodYear" th:value="${car.prodYear}"/>
+        <input title="text" name="bio" id="bio" th:value="${car.bio}"/>
+        <textarea title="text" name =></textarea>
+        <button title="submit">update this car</button>
     </form>
 </div>

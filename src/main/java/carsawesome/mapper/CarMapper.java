@@ -13,10 +13,15 @@ public class CarMapper implements Mapper<Car, CarDto> {
         return new CarDto
                 .Builder()
                 .brand(from.getBrand())
-                .carType(from.getCarType().getType())
+                .carType(from.getCarType().getTitle())
                 .bio(from.getBio())
                 .model(from.getModel())
                 .prodYear(from.getProdYear())
                 .build();
+    }
+
+    @Override
+    public Car reverse(CarDto to) {
+        return null;
     }
 }

@@ -5,6 +5,7 @@ import carsawesome.model.CarType;
 import carsawesome.model.dto.CarTypeDto;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class CarTypeDtoMapper implements Mapper<CarType, CarTypeDto> {
                 .stream()
                 .map(CarsToString.INSTANCE).collect(Collectors.toList());
 
-        return new CarTypeDto(from.getType(),cars);
+        return new CarTypeDto(from.getTitle(),cars);
 
     }
 
@@ -27,5 +28,11 @@ public class CarTypeDtoMapper implements Mapper<CarType, CarTypeDto> {
         public String apply(Car car) {
             return car.getBrand();
         }
+    }
+
+    @Override
+    public CarType reverse(CarTypeDto to) {
+
+        return new CarType(to.getType(), new HashSet<>());
     }
 }

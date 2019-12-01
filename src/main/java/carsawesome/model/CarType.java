@@ -12,14 +12,20 @@ public class CarType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String type;
+    private String title;
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "carType", cascade = CascadeType.ALL)
     private Set<Car> cars = new HashSet<>();
 
-    public CarType(String type) {
+    public CarType(String title, Set<Car> cars) {
+        this.title = title;
+        this.cars = cars;
+    }
+
+
+    public CarType(String title) {
         this();
-        this.type = type;
+        this.title = title;
     }
 
     public Set<Car> getCars() {
@@ -41,11 +47,11 @@ public class CarType {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
